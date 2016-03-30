@@ -3,6 +3,7 @@ package com.JG.main;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,11 +11,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.JG.common.Constans;
 import com.JG.service.ClientService;
 
 public class MainFrameGUI extends JFrame{
 	private static final long serialVersionUID = 7723806482557461833L;
 
+	Map<String,String> extend;
+	
 	private JButton ok = new JButton("¿ªÊ¼");
 	private JButton close = new JButton("¹Ø±Õ");
 	
@@ -31,7 +35,8 @@ public class MainFrameGUI extends JFrame{
 	private JPanel zipPanel = new JPanel();
 	private JPanel containerPanel = new JPanel(new BorderLayout());
 	private JPanel buttonPanel = new JPanel();
-	public MainFrameGUI() {
+	public MainFrameGUI(Map<String,String> extend) {
+		this.extend = extend;
 		initGUI();
 	}
 
@@ -41,6 +46,7 @@ public class MainFrameGUI extends JFrame{
 		textPanel.add(expLabel);
 		textPanel.add(expText);
 		
+		zipFileDirText.setText(this.extend.get(Constans.ZIP_FILE_ABSOLUTELY_PATH));
 		zipPanel.add(zipFileLabel);
 		zipPanel.add(zipFileDirText);
 		
