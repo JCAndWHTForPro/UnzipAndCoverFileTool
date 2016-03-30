@@ -26,6 +26,22 @@ public interface IFileOper {
 	 */
 	public void unzipFile(File zipFile,File destFile,Set<String> excludeFileNames);
 	
+	/**
+	 * 获取不带后缀名的文件名
+	 * @author Ji Cheng 
+	 * @date 2016年3月30日
+	 * @param fileName
+	 * @return String
+	 */
 	public String getFileNameNoPoxiy(String fileName);
+	
+	/**
+	 * 删除目录中的所有文件，包含这个目录
+	 * @author Ji Cheng 
+	 * @date 2016年3月30日
+	 * @param srcFile
+	 * @return boolean
+	 */
+	public boolean delDir(File srcFile);
 	
 }

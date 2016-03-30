@@ -58,6 +58,7 @@ public class FileOperImpl implements IFileOper {
 	public void coverFile(File sourcePath, File destPath,Set<String> excludeFileNameSet) {
 		if(excludeFileNameSet!=null&&excludeFileNameSet.size()>0
 				&&excludeFileNameSet.contains(destPath.getAbsolutePath())){
+			System.out.println("exclude file'name is : "+destPath.getAbsolutePath());
 			return;//如果包含要排除的目录或者是文件名，直接返回
 		}
 		if(sourcePath.isDirectory()){
@@ -138,6 +139,32 @@ public class FileOperImpl implements IFileOper {
 			}
 		}
 		
+	}
+	
+	public boolean delDir(File srcFile) {
+	    if (!srcFile.exists()){
+            System.out.println("The dir need to delete not exists!");
+            return false;
+	    }
+		if (!srcFile.isDirectory()) {
+			System.out.println("The dir need to delete is not a directory!");
+			return false;
+		}
+        // 删除目录中的所有元素，包括文件和文件夹
+		File fileList[] = srcFile.listFiles();
+		for (int k = 0; k < fileList.length; k++) {
+			File delFile = fileList[k];
+			if (delFile.isFile()) {
+				boolean re = delFile.delete();
+				if(!re){
+					System.out.println("del file not success." + delFile.getAbsolutePath());
+    			}
+			} else if (delFile.isDirectory()) {
+				delDir(delFile);
+			}
+		}
+		// 删除当前目录
+		return srcFile.delete();
 	}
 	
 }

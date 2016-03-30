@@ -20,7 +20,7 @@ public class ClientService {
 		return service;
 	}
 	
-	public void deal(String sourceFileName,String destFileName,String exceptFileName) throws Exception{
+	public void deal(String sourceFileName,String destFileName,Set<String> set) throws Exception{
 		MainService mainService = MainService.getMainService();
 		File sourceFile = new File(sourceFileName);
 		File destFile = new File(destFileName);
@@ -38,11 +38,12 @@ public class ClientService {
 		File unzipFileDir = new File(zipFileUnzipDir);
 		unzipFileDir.mkdirs();
 		
-		Set<String> set = new HashSet<String>();
-		set.add("ums-client/procs");
-		set.add("ums-server/procs");
-		fileOper.unzipFile(sourceFile, unzipFileDir, set);
-		fileOper.coverFile(unzipFileDir, destFile, null);
+		Set<String> unzipIncludeFileSet = new HashSet<String>();
+		unzipIncludeFileSet.add("ums-client/procs");
+		unzipIncludeFileSet.add("ums-server/procs");
+		fileOper.unzipFile(sourceFile, unzipFileDir, unzipIncludeFileSet);
+		fileOper.coverFile(unzipFileDir, destFile, set);
+		fileOper.delDir(unzipFileDir);
 		System.out.println("end");
 	}
 }

@@ -3,7 +3,10 @@ package com.JG.main;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -41,8 +44,10 @@ public class MainFrameGUI extends JFrame{
 	}
 
 	private void initGUI() {
+		dirText.setText("D:\\netnumen\\ems\\");
 		textPanel.add(labelForDirText);
 		textPanel.add(dirText);
+		expText.setText("D:\\netnumen\\ems\\ums-server\\procs\\ppus\\mucf.ppu\\mucf-main.pmu\\mucf-osf-mml.par\\conf");
 		textPanel.add(expLabel);
 		textPanel.add(expText);
 		
@@ -66,10 +71,17 @@ public class MainFrameGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String destText = dirText.getText();
 				String sourceText = zipFileDirText.getText();
+				Set<String> set = new HashSet<String>();
+				set.add(expText.getText());
 				try {
-					ClientService.getService().deal(sourceText, destText, null);
+					ClientService.getService().deal(sourceText, destText, set);
 				} catch (Exception e1) {
 					e1.printStackTrace();
+				} finally{
+					if(extend.get(Constans.ZIP_FILE_ABSOLUTELY_PATH)!=null){
+						new File(extend.get(Constans.ZIP_FILE_ABSOLUTELY_PATH)).delete();
+					}
+					MainFrameGUI.this.dispose();
 				}
 			}
 		});
