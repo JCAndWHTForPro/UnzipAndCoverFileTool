@@ -47,7 +47,7 @@ public class MainFrameGUI extends JFrame{
 		dirText.setText("D:\\netnumen\\ems\\");
 		textPanel.add(labelForDirText);
 		textPanel.add(dirText);
-		expText.setText("D:\\netnumen\\ems\\ums-server\\procs\\ppus\\mucf.ppu\\mucf-main.pmu\\mucf-osf-mml.par\\conf");
+		expText.setText("D:\\netnumen\\ems\\ums-server\\procs\\ppus\\mucf.ppu\\mucf-main.pmu\\mucf-osf-mml.par\\conf\\mo");
 		textPanel.add(expLabel);
 		textPanel.add(expText);
 		
@@ -72,7 +72,11 @@ public class MainFrameGUI extends JFrame{
 				String destText = dirText.getText();
 				String sourceText = zipFileDirText.getText();
 				Set<String> set = new HashSet<String>();
+				String clientPpuInfo = "D:\\netnumen\\ems\\ums-client\\procs\\ppus\\mucf.ppu\\ppuinfo.xml";
+				String serverPpuInfo = "D:\\netnumen\\ems\\ums-server\\procs\\ppus\\mucf.ppu\\ppuinfo.xml";
 				set.add(expText.getText());
+				set.add(clientPpuInfo);
+				set.add(serverPpuInfo);
 				try {
 					ClientService.getService().deal(sourceText, destText, set);
 				} catch (Exception e1) {
