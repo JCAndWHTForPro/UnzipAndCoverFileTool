@@ -22,18 +22,23 @@ public class MainGUI {
 		if(arg.length>0){
 			zipFileAbsolutePath = arg[0];
 		}else{
-			System.out.println("");
-			return;
+			zipFileAbsolutePath="D:\\netnumen\\mucf-SNAPSHOT.zip";
 		}
-		Map<String,Object> map = getXMLInfo(new File("D:\\tempFile\\base.xml"));
-		Set<String> unZipSet = new HashSet<String>((List<String>)map.get(Constans.XML_UNZIPFILE));
-		Set<String> excludeFileSet = new HashSet<String>((List<String>)map.get(Constans.XML_EXCLUDECOVERY));
+		System.out.println(System.getProperty("user.dir"));
+		File currentDir = new File(System.getProperty("user.dir"));
+		Map<String,Object> map = getXMLInfo(new File(currentDir,"base.xml"));
+		Set<String> unZipSet = new HashSet<String>((List<String>)map.get(Constans.UNZIPFILE_LIST));
+		Set<String> excludeFileSet = new HashSet<String>((List<String>)map.get(Constans.EXCLUDEFILE_LIST));
 		
 		File unzipFileSource = new File(zipFileAbsolutePath);
-		File unzipFileDest = new File(unzipFileSource.getAbsolutePath()+File.separator);
+		File unzipFileDest = new File(currentDir,FileUtil.getFileNameNoPoxiy(unzipFileSource.getName()));
 		unzipFileDest.mkdirs();
 		FileUtil.unzipFile(unzipFileSource, unzipFileDest, unZipSet);
-		FileUtil.coverFile(unzipFileDest, new File((String)map.get(Constans.XML_DESTINATION)), excludeFileSet);
+		System.out.println("unzip file successful!");
+		FileUtil.coverFile(unzipFileDest, new File((String)map.get(Constans.DEST_DIR)), excludeFileSet);
+		System.out.println("cover file successful!");
+		FileUtil.delDir(unzipFileDest);
+		unzipFileSource.delete();
 	}
 	
 	/**
