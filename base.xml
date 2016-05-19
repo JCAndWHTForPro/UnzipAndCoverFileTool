@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<base>
+	<destination>D:\netnumen\ems_US</destination>
+	<unzipFile>
+		<file1>ums-client/procs</file1>
+		<file2>ums-server/procs</file2>
+	</unzipFile>
+	<excludeCovery>
+		<file1>D:\netnumen\ems_US\ums-client\procs\ppus\mucf.ppu\ppuinfo.xml</file1>
+	</excludeCovery>
+</base>
